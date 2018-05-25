@@ -1,0 +1,195 @@
+ext {
+
+    /**
+     * Versions of app tools, plugins and libraries
+     */
+    versions = [:]
+
+    /**
+     * App plugins
+     */
+    gradlePlugins = [:]
+
+    /**
+     * App release libraries
+     */
+    libraries = [:]
+
+    /**
+     * App debug only libraries
+     */
+    devLibraries = [:]
+
+    /**
+     * App test libraries
+     */
+    testLibraries = [:]
+
+}
+
+versions += [
+    code      : 1,
+    name      : '0.0.1',
+
+    minSdk    : 22,
+    targetSdk : 27,
+    buildTools: '27.0.3'
+]
+
+versions += [
+    gradleAndroid : '3.1.0',
+    gradleKotlin  : '1.2.41',
+    paperwork     : '1.2.7',
+    devMetrics    : '0.4',
+    dexCount      : '0.8.2',
+    gradleVersions: '0.17.0',
+    jacoco        : '0.7.6.201602180812',
+    detekt        : '1.0.0.RC5',
+    buildScan     : '1.10.3'
+]
+
+gradlePlugins += [
+    android       : "com.android.tools.build:gradle:$versions.gradleAndroid",
+    kotlin        : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.gradleKotlin",
+    paperwork     : "hu.supercluster:paperwork-plugin:$versions.paperwork",
+    devMetrics    : "com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:$versions.devMetrics",
+    dexcount      : "com.getkeepsafe.dexcount:dexcount-gradle-plugin:$versions.dexCount",
+    gradleVersions: "com.github.ben-manes:gradle-versions-plugin:$versions.gradleVersions",
+    jacoco        : "org.jacoco:org.jacoco.core:$versions.jacoco",
+    detekt        : "io.gitlab.arturbosch.detekt:$versions.detekt",
+    buildScan     : "com.gradle:build-scan-plugin:$versions.buildScan"
+]
+
+versions += [
+    kotlin          : '1.2.41',
+    support         : '27.1.1',
+    constraintLayout: '1.1.0',
+    dagger          : '2.16',
+    rxjava          : '2.0.2',
+    anko            : '0.10.5',
+    gson            : '2.7',
+    okhttp          : '3.2.0',
+    retrofit        : '2.4.0',
+    picasso         : '2.5.2',
+    picassoOkttp    : '1.0.2',
+    arch            : '1.1.0'
+]
+
+libraries += [
+    kotlin   : [
+        "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
+    ],
+
+    support  : [
+        "com.android.support:support-annotations:$versions.support",
+        "com.android.support:appcompat-v7:$versions.support",
+        "com.android.support:recyclerview-v7:$versions.support",
+        "com.android.support:cardview-v7:$versions.support",
+        "com.android.support:design:$versions.support",
+        "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
+    ],
+
+    dagger   : [
+        "com.google.dagger:dagger:$versions.dagger",
+        "com.google.dagger:dagger-android-support:$versions.dagger"
+    ],
+
+    daggerApt: [
+        "com.google.dagger:dagger-compiler:$versions.dagger",
+        "com.google.dagger:dagger-android-processor:$versions.dagger"
+    ],
+
+    rxjava   : [
+        "io.reactivex.rxjava2:rxandroid:$versions.rxjava",
+        "io.reactivex.rxjava2:rxjava:$versions.rxjava"
+    ],
+
+    anko     : "org.jetbrains.anko:anko-commons:$versions.anko",
+
+    gson     : "com.google.code.gson:gson:$versions.gson",
+
+    okHttp   : [
+        "com.squareup.okhttp3:okhttp:$versions.okhttp",
+        "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
+    ],
+
+    retrofit : [
+        "com.squareup.retrofit2:retrofit:$versions.retrofit",
+        "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+        "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit"
+    ],
+
+    picasso  : [
+        "com.squareup.picasso:picasso:$versions.picasso",
+        "com.jakewharton.picasso:picasso2-okhttp3-downloader:$versions.picassoOkttp"
+    ],
+
+    fresko   : [
+    ],
+
+    glide    : [
+    ],
+
+    room     : [
+        "android.arch.persistence.room:runtime:$versions.arch",
+        "android.arch.persistence.room:rxjava2:$versions.arch"
+    ],
+
+    roomApt  : [
+        "android.arch.persistence.room:compiler:$versions.arch",
+    ],
+
+    paging   : [
+        "android.arch.paging:runtime:$versions.arch"
+    ]
+]
+
+versions += [
+    stetho    : '1.5.0',
+    leakCanary: '1.5.4',
+    tinyDancer: '0.0.8',
+    paperwork : '1.2.7',
+    lynx      : '1.6'
+]
+
+devLibraries += [
+    stetho    : [
+        "com.facebook.stetho:stetho:$versions.stetho",
+        "com.facebook.stetho:stetho-okhttp3:$versions.stetho"
+    ],
+
+    leakCanary: "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary",
+
+    tinyDancer: "com.github.brianPlummer:tinydancer:$versions.tinyDancer",
+
+    paperwork : "hu.supercluster:paperwork:$versions.paperwork",
+
+    lynx      : "com.github.pedrovgs:lynx:$versions.lynx"
+]
+
+versions += [
+    junit      : '4.12',
+    assertj    : '3.10.0',
+    mockito    : '1.10.19',
+    espresso   : '3.0.2',
+    testSupport: '0.5'
+]
+
+testLibraries += [
+    junit   : "junit:junit:$versions.junit",
+
+    assertj : "org.assertj:assertj-core:$versions.assertj",
+
+    mockito : "org.mockito:mockito-core:$versions.mockito",
+
+    espresso: "com.android.support.test.espresso:espresso-core:$versions.espresso",
+
+    support : [
+        "com.android.support.test:runner:$versions.testSupport",
+        "com.android.support.test:rules:$versions.testSupport"
+    ],
+
+    room    : [
+        "android.arch.persistence.room:testing:$versions.arch"
+    ]
+]

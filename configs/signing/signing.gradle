@@ -1,0 +1,21 @@
+ext {
+
+    /**
+     * App dev signing config
+     */
+    appDevSigning = [:]
+
+}
+
+final def signingProps = "$signingConfigsDir/signing.properties"
+
+final def signingKeys = [
+    storeFile    : { x -> file("$signingConfigsDir/$x") },
+    storePassword: { x -> x },
+    keyAlias     : { x -> x },
+    keyPassword  : { x -> x },
+]
+
+final def props = new Properties()
+props.load(new FileInputStream(signingProps))
+signingKeys.each { k, fn -> appDevSigning[k] = fn(props[k]) }
