@@ -1,0 +1,25 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion versions.targetSdk
+    buildToolsVersion versions.buildTools
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.code
+        versionName versions.name
+    }
+}
+
+dependencies {
+    implementation project(':app-data')
+
+    implementation libraries.kotlin
+    implementation libraries.dagger
+
+    testImplementation testLibraries.junit
+    testImplementation testLibraries.assertj
+    testImplementation testLibraries.mockito
+}

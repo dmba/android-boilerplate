@@ -1,0 +1,10 @@
+ext {
+
+    /**
+     * List of app proguard files
+     */
+    appProguardRules = []
+
+}
+
+appProguardRules = file("$proguardConfigsDir/rules").listFiles()

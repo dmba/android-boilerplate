@@ -1,0 +1,23 @@
+rootProject.ext {
+
+    /**
+     *
+     */
+    proguardConfigsDir = "$projectDir/proguard"
+
+    /**
+     *
+     */
+    signingConfigsDir = "$projectDir/signing"
+
+}
+
+rootProject.buildscript {
+    apply from: "$projectDir/dependencies.gradle"
+}
+
+rootProject.apply from: "$projectDir/dependencies.gradle"
+
+rootProject.apply from: "$proguardConfigsDir/proguard.gradle"
+
+rootProject.apply from: "$signingConfigsDir/signing.gradle"
