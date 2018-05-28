@@ -1,13 +1,14 @@
 package io.github.dmba.android_boilerplate.common.extensions
 
-import android.app.Activity
+import android.support.annotation.LayoutRes
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
+import android.view.ViewGroup
 
 /**
- * Created by dmba on 5/18/18.
+ * Created by dmba on 6/3/18.
  */
 
 inline fun View.snack(@StringRes messageRes: Int, length: Int = Snackbar.LENGTH_LONG, f: Snackbar.() -> Unit) {
@@ -29,10 +30,6 @@ fun Snackbar.action(action: String, color: Int? = null, listener: (View) -> Unit
     color?.let { setActionTextColor(color) }
 }
 
-fun Activity.toast(message: String, lenght: Int = Toast.LENGTH_LONG) {
-    Toast.makeText(this, message, lenght).show()
-}
-
-fun Activity.toast(@StringRes messageRes: Int, lenght: Int = Toast.LENGTH_LONG) {
-    Toast.makeText(this, messageRes, lenght).show()
+fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
+    return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
 }
