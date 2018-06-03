@@ -8,7 +8,7 @@ android {
     buildToolsVersion versions.buildTools
 
     defaultConfig {
-        applicationId "io.github.dmba.android_boilerplate"
+        applicationId "me.dmba.mychecks"
 
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
