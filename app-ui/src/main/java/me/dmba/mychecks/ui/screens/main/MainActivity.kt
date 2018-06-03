@@ -2,121 +2,62 @@ package me.dmba.mychecks.ui.screens.main
 
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.view.ViewCompat
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearLayoutManager.VERTICAL
 import android.view.View
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import me.dmba.mychecks.R
 import me.dmba.mychecks.data.model.Check
-import me.dmba.mychecks.ui.screens.detail.DetailActivity
+import me.dmba.mychecks.domain.main.MainContract
 import me.dmba.mychecks.ui.utils.ListPaddingDecoration
-import org.jetbrains.anko.intentFor
+import javax.inject.Inject
 
 /**
  * Created by dmba on 5/31/18.
  */
-class MainActivity : AppCompatActivity(), OnChecksItemClickListener {
+class MainActivity : DaggerAppCompatActivity(), MainContract.View, OnChecksItemClickListener {
 
-    companion object {
-        const val EXTRA_CHECK_ITEM = "EXTRA_CHECK_ITEM"
-        const val EXTRA_CHECK_ITEM_TRANSITION_NAME = "EXTRA_CHECK_ITEM_TRANSITION_NAME"
-    }
+    @Inject
+    lateinit var presenter: MainContract.Presenter
 
-    private val data: List<Check> = arrayListOf(
-        Check(
-            "Hermes",
-            "$1,500.67",
-            "March 13, 2018",
-            R.drawable.logo_apple,
-            false
-        ),
-        Check(
-            "Philipp Plein",
-            "$1,245.17",
-            "March 13, 2018",
-            R.drawable.logo_chrome,
-            true
-        ),
-        Check(
-            "L`Ocitane",
-            "$545.28",
-            "March 13, 2018",
-            R.drawable.logo_cloud,
-            true
-        ),
-        Check(
-            "Kenzo",
-            "$375.37",
-            "March 13, 2018",
-            R.drawable.logo_grtia,
-            false
-        ),
-        Check(
-            "Ray Ban",
-            "$151.33",
-            "March 13, 2018",
-            R.drawable.logo_rayban,
-            true
-        ),
-        Check(
-            "Stadium",
-            "$230.47",
-            "March 13, 2018",
-            R.drawable.logo_stadium,
-            false
-        ),
-        Check(
-            "Apple",
-            "$3486.23",
-            "March 13, 2018",
-            R.drawable.logo_apple,
-            true
-        )
-    )
+    lateinit var sharedItemView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-        setUpRecyclerView(this)
+        setUpRecyclerView()
+        setUpSwipeRefreshLayout()
+        presenter.loadData()
     }
 
-    override fun onCheckItemClick(position: Int, check: Check, sharedView: View) {
-        val transitionName = ViewCompat.getTransitionName(sharedView)
-        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-            this,
-            sharedView,
-            transitionName)
-
-        startActivity(intentFor<DetailActivity>(
-            EXTRA_CHECK_ITEM to check,
-            EXTRA_CHECK_ITEM_TRANSITION_NAME to transitionName
-        ), options.toBundle())
+    override fun updateList(items: List<Check>) {
+        (recyclerView.adapter as ChecksRecyclerViewAdapter).updateData(items)
     }
 
-    private fun setUpRecyclerView(itemClickListener: OnChecksItemClickListener) {
-        recyclerView.apply {
-            adapter = ChecksRecyclerViewAdapter(itemClickListener, data)
-            layoutManager = LinearLayoutManager(context, VERTICAL, false)
-            itemAnimator = DefaultItemAnimator()
-            setHasFixedSize(true)
-            addItemDecoration(ListPaddingDecoration.from(context))
-        }
+    override fun onCheckItemClick(check: Check, sharedView: View) {
+        sharedItemView = sharedView
+        presenter.onItemSelect(check)
+    }
 
-        swipeRefreshLayout.apply {
-            setOnRefreshListener {
-                Handler().postDelayed({
-                    swipeRefreshLayout.isRefreshing = false
-                }, 3000)
-            }
-            setColorSchemeResources(R.color.orange, R.color.green, R.color.blue)
+    private fun setUpRecyclerView() = recyclerView.apply {
+        adapter = ChecksRecyclerViewAdapter(this@MainActivity)
+        layoutManager = LinearLayoutManager(context, VERTICAL, false)
+        itemAnimator = DefaultItemAnimator()
+        setHasFixedSize(true)
+        addItemDecoration(ListPaddingDecoration.from(context))
+    }
+
+    private fun setUpSwipeRefreshLayout() = swipeRefreshLayout.apply {
+        setOnRefreshListener {
+            Handler().postDelayed({
+                swipeRefreshLayout.isRefreshing = false
+            }, 3000)
         }
+        setColorSchemeResources(R.color.orange, R.color.green, R.color.blue)
     }
 
 }

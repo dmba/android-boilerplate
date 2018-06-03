@@ -7,10 +7,11 @@ import android.os.Parcelable
  * Created by dmba on 6/2/18.
  */
 data class Check(
+    val id: String,
     val name: String,
     val amount: String,
     val date: String,
-    val imgRes: Int,
+    val imgUrl: String,
     val isReceived: Boolean
 ) : Parcelable {
 
@@ -18,14 +19,16 @@ data class Check(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readInt(),
+        parcel.readString(),
+        parcel.readString(),
         parcel.readByte() != 0.toByte())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
         parcel.writeString(name)
         parcel.writeString(amount)
         parcel.writeString(date)
-        parcel.writeInt(imgRes)
+        parcel.writeString(imgUrl)
         parcel.writeByte(if (isReceived) 1 else 0)
     }
 
