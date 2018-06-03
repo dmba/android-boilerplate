@@ -48,9 +48,11 @@ android {
 
 dependencies {
     implementation project(':app-common')
+    implementation project(':app-data')
     implementation project(':app-domain')
 
     implementation libraries.kotlin
+    implementation libraries.anko
     implementation libraries.support
 
     implementation libraries.dagger
