@@ -1,24 +1,18 @@
-package me.dmba.mychecks.data
+package me.dmba.mychecks.data.source.remote
 
-import io.reactivex.Observable
-import me.dmba.mychecks.data.model.Check
+import io.reactivex.Flowable
+import me.dmba.mychecks.common.extensions.random
+import me.dmba.mychecks.data.model.CheckResponse
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
- * Created by dmba on 5/26/18.
+ * Created by dmba on 6/6/18.
  */
-interface ChecksDataSource {
+internal class FakeChecksApi @Inject constructor() : ChecksApi {
 
-    fun getChecks(): Observable<List<Check>>
-
-    fun getCheckAt(position: Int): Observable<Check>
-
-}
-
-class LocalChecksDataSource @Inject constructor() : ChecksDataSource {
-
-    val data = arrayListOf(
-        Check(
+    private val data = arrayListOf(
+        CheckResponse(
             "#01",
             "Hermes",
             "$1,500.67",
@@ -26,7 +20,7 @@ class LocalChecksDataSource @Inject constructor() : ChecksDataSource {
             "file:///android_asset/logos/logo_apple.png",
             false
         ),
-        Check(
+        CheckResponse(
             "#02",
             "Philipp Plein",
             "$1,245.17",
@@ -34,7 +28,7 @@ class LocalChecksDataSource @Inject constructor() : ChecksDataSource {
             "file:///android_asset/logos/logo_chrome.png",
             true
         ),
-        Check(
+        CheckResponse(
             "#03",
             "L`Ocitane",
             "$545.28",
@@ -42,7 +36,7 @@ class LocalChecksDataSource @Inject constructor() : ChecksDataSource {
             "file:///android_asset/logos/logo_cloud.jpeg",
             true
         ),
-        Check(
+        CheckResponse(
             "#04",
             "Kenzo",
             "$375.37",
@@ -50,7 +44,7 @@ class LocalChecksDataSource @Inject constructor() : ChecksDataSource {
             "file:///android_asset/logos/logo_grtia.jpeg",
             false
         ),
-        Check(
+        CheckResponse(
             "#05",
             "Ray Ban",
             "$151.33",
@@ -58,7 +52,7 @@ class LocalChecksDataSource @Inject constructor() : ChecksDataSource {
             "file:///android_asset/logos/logo_rayban.png",
             true
         ),
-        Check(
+        CheckResponse(
             "#06",
             "Stadium",
             "$230.47",
@@ -66,7 +60,7 @@ class LocalChecksDataSource @Inject constructor() : ChecksDataSource {
             "file:///android_asset/logos/logo_stadium.png",
             false
         ),
-        Check(
+        CheckResponse(
             "#07",
             "Apple",
             "$3486.23",
@@ -76,8 +70,11 @@ class LocalChecksDataSource @Inject constructor() : ChecksDataSource {
         )
     )
 
-    override fun getChecks(): Observable<List<Check>> = Observable.fromCallable { data }
+    private val thresholdMs: Long get() = (30..3000).random()
 
-    override fun getCheckAt(position: Int): Observable<Check> = Observable.fromCallable { data[position] }
+    override fun getAll(): Flowable<List<CheckResponse>> {
+        return Flowable.fromCallable<List<CheckResponse>> { data }
+            .delay(thresholdMs, TimeUnit.MILLISECONDS)
+    }
 
 }

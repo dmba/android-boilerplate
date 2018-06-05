@@ -3,8 +3,8 @@ package me.dmba.mychecks.domain.di
 import dagger.Binds
 import dagger.Module
 import me.dmba.mychecks.common.scopes.ForActivity
-import me.dmba.mychecks.domain.main.MainContract
-import me.dmba.mychecks.domain.main.MainPresenter
+import me.dmba.mychecks.domain.MainContract
+import me.dmba.mychecks.domain.presenters.MainPresenter
 
 /**
  * Created by dmba on 6/5/18.
@@ -17,7 +17,7 @@ import me.dmba.mychecks.domain.main.MainPresenter
 object DomainModule
 
 @Module
-interface DomainModuleBindings {
+internal interface DomainModuleBindings {
 
     @Binds
     @ForActivity

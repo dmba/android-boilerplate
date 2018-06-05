@@ -1,8 +1,7 @@
-package me.dmba.mychecks.domain.main
+package me.dmba.mychecks.domain
 
 import android.support.annotation.UiThread
 import me.dmba.mychecks.data.model.Check
-import me.dmba.mychecks.domain.BasePresenter
 
 /**
  * Created by dmba on 6/3/18.
@@ -14,15 +13,24 @@ interface MainContract {
         @UiThread
         fun updateList(items: List<Check>)
 
+        @UiThread
+        fun showLoading()
+
+        @UiThread
+        fun hideLoading()
+
+        @UiThread
+        fun showDataFetchError()
+
     }
 
-    interface Presenter : BasePresenter {
+    interface Presenter {
 
         @UiThread
         fun onItemSelect(check: Check, itemPosition: Int)
 
         @UiThread
-        fun loadData()
+        fun loadData(refresh: Boolean = false)
 
     }
 

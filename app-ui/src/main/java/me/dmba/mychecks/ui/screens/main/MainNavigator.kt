@@ -3,7 +3,7 @@ package me.dmba.mychecks.ui.screens.main
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.view.ViewCompat
 import me.dmba.mychecks.data.model.Check
-import me.dmba.mychecks.domain.main.MainContract
+import me.dmba.mychecks.domain.MainContract
 import me.dmba.mychecks.ui.screens.detail.DetailActivity
 import org.jetbrains.anko.intentFor
 import javax.inject.Inject
@@ -16,7 +16,7 @@ class MainNavigator @Inject constructor(
 ) : MainContract.Navigator {
 
     companion object {
-        const val EXTRA_CHECK_ITEM_POSITION = "EXTRA_CHECK_ITEM_POSITION"
+        const val EXTRA_CHECK_ITEM_ID = "EXTRA_CHECK_ITEM_ID"
         const val EXTRA_CHECK_ITEM_TRANSITION_NAME = "EXTRA_CHECK_ITEM_TRANSITION_NAME"
     }
 
@@ -28,7 +28,7 @@ class MainNavigator @Inject constructor(
             transitionName)
 
         activity.startActivity(activity.intentFor<DetailActivity>(
-            MainNavigator.EXTRA_CHECK_ITEM_POSITION to itemPosition,
+            MainNavigator.EXTRA_CHECK_ITEM_ID to check.id,
             MainNavigator.EXTRA_CHECK_ITEM_TRANSITION_NAME to transitionName
         ), options.toBundle())
         activity.overridePendingTransition(0, 0);
