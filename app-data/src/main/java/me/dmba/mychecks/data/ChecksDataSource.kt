@@ -1,5 +1,6 @@
 package me.dmba.mychecks.data
 
+import io.reactivex.Observable
 import me.dmba.mychecks.data.model.Check
 import javax.inject.Inject
 
@@ -8,9 +9,9 @@ import javax.inject.Inject
  */
 interface ChecksDataSource {
 
-    fun getChecks(): List<Check>
+    fun getChecks(): Observable<List<Check>>
 
-    fun getCheckAt(position: Int): Check
+    fun getCheckAt(position: Int): Observable<Check>
 
 }
 
@@ -75,8 +76,8 @@ class LocalChecksDataSource @Inject constructor() : ChecksDataSource {
         )
     )
 
-    override fun getChecks(): List<Check> = data
+    override fun getChecks(): Observable<List<Check>> = Observable.fromCallable { data }
 
-    override fun getCheckAt(position: Int): Check = data[position]
+    override fun getCheckAt(position: Int): Observable<Check> = Observable.fromCallable { data[position] }
 
 }

@@ -32,13 +32,16 @@ class DetailActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
+        postponeEnterTransition()
+
         runEnterTransitions()
 
         sharedView.transitionName = imgTransitionName
 
-        val checkItem = dataSource.getCheckAt(checkItemPosition)
-
-        setupCheckItem(checkItem)
+        dataSource.getCheckAt(checkItemPosition).subscribe {
+            setupCheckItem(it)
+            startPostponedEnterTransition()
+        }
     }
 
     override fun onBackPressed() {

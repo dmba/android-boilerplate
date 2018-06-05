@@ -15,10 +15,8 @@ class MainPresenter @Inject constructor(
     private val dataSource: ChecksDataSource
 ) : MainContract.Presenter {
 
-    private val data: List<Check> by lazy { dataSource.getChecks() }
-
     override fun loadData() {
-        view.updateList(data)
+        dataSource.getChecks().subscribe { view.updateList(it) }
     }
 
     override fun onItemSelect(check: Check, itemPosition: Int) {
