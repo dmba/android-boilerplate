@@ -54,6 +54,7 @@ dependencies {
     implementation libraries.kotlin
     implementation libraries.anko
     implementation libraries.support
+    implementation libraries.picasso
 
     implementation libraries.dagger
     implementation libraries.rxjava

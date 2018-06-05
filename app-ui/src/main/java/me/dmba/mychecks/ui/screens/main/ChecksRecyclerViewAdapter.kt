@@ -4,6 +4,7 @@ import android.support.v4.view.ViewCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_layout.view.*
 import me.dmba.mychecks.R
 import me.dmba.mychecks.common.extensions.inflate
@@ -14,7 +15,7 @@ import me.dmba.mychecks.data.model.Check
  */
 
 interface OnChecksItemClickListener {
-    fun onCheckItemClick(position: Int, check: Check, sharedView: View)
+    fun onCheckItemClick(check: Check, sharedView: View)
 }
 
 class ChecksViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -22,14 +23,19 @@ class ChecksViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         name.text = check.name
         date.text = check.date
         amount.text = check.amount
-        logo.setImageResource(check.imgRes)
+
+        Picasso
+            .with(itemView.context)
+            .load(check.imgUrl)
+            .into(logo)
     }
 }
 
 class ChecksRecyclerViewAdapter(
-    private val clickListener: OnChecksItemClickListener,
-    private val data: List<Check>
+    private val clickListener: OnChecksItemClickListener
 ) : RecyclerView.Adapter<ChecksViewHolder>() {
+
+    private var data: List<Check> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): ChecksViewHolder {
         val itemView = parent.inflate(R.layout.item_layout, false)
@@ -41,11 +47,16 @@ class ChecksRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ChecksViewHolder, position: Int) {
         holder.bindModel(data[position])
 
-        ViewCompat.setTransitionName(holder.itemView, data[position].name)
+        ViewCompat.setTransitionName(holder.itemView, data[position].id)
 
         holder.itemView.setOnClickListener {
-            clickListener.onCheckItemClick(holder.adapterPosition, data[position], holder.itemView)
+            clickListener.onCheckItemClick(data[position], holder.itemView)
         }
+    }
+
+    fun updateData(items: List<Check>) {
+        data = items
+        notifyDataSetChanged()
     }
 
 }
