@@ -16,11 +16,11 @@ class MainNavigator @Inject constructor(
 ) : MainContract.Navigator {
 
     companion object {
-        const val EXTRA_CHECK_ITEM = "EXTRA_CHECK_ITEM"
+        const val EXTRA_CHECK_ITEM_POSITION = "EXTRA_CHECK_ITEM_POSITION"
         const val EXTRA_CHECK_ITEM_TRANSITION_NAME = "EXTRA_CHECK_ITEM_TRANSITION_NAME"
     }
 
-    override fun goToDetails(check: Check) {
+    override fun goToDetails(check: Check, itemPosition: Int) {
         val transitionName = ViewCompat.getTransitionName(activity.sharedItemView)
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
             activity,
@@ -28,7 +28,7 @@ class MainNavigator @Inject constructor(
             transitionName)
 
         activity.startActivity(activity.intentFor<DetailActivity>(
-            MainNavigator.EXTRA_CHECK_ITEM to check,
+            MainNavigator.EXTRA_CHECK_ITEM_POSITION to itemPosition,
             MainNavigator.EXTRA_CHECK_ITEM_TRANSITION_NAME to transitionName
         ), options.toBundle())
         activity.overridePendingTransition(0, 0);

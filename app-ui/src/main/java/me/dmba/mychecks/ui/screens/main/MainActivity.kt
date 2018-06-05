@@ -35,16 +35,16 @@ class MainActivity : DaggerAppCompatActivity(), MainContract.View, OnChecksItemC
     }
 
     override fun updateList(items: List<Check>) {
-        (recyclerView.adapter as ChecksRecyclerViewAdapter).updateData(items)
+        (recyclerView.adapter as ChecksAdapter).updateData(items)
     }
 
-    override fun onCheckItemClick(check: Check, sharedView: View) {
+    override fun onCheckItemClick(check: Check, itemPosition: Int, sharedView: View) {
         sharedItemView = sharedView
-        presenter.onItemSelect(check)
+        presenter.onItemSelect(check, itemPosition)
     }
 
     private fun setUpRecyclerView() = recyclerView.apply {
-        adapter = ChecksRecyclerViewAdapter(this@MainActivity)
+        adapter = ChecksAdapter(this@MainActivity)
         layoutManager = LinearLayoutManager(context, VERTICAL, false)
         itemAnimator = DefaultItemAnimator()
         setHasFixedSize(true)

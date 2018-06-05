@@ -19,7 +19,7 @@ interface MainContract {
     interface Presenter : BasePresenter {
 
         @UiThread
-        fun onItemSelect(check: Check)
+        fun onItemSelect(check: Check, itemPosition: Int)
 
         @UiThread
         fun loadData()
@@ -29,7 +29,7 @@ interface MainContract {
     interface Navigator {
 
         @UiThread
-        fun goToDetails(check: Check)
+        fun goToDetails(check: Check, itemPosition: Int)
 
     }
 

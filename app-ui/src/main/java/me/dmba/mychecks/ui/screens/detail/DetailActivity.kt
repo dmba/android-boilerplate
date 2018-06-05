@@ -8,8 +8,9 @@ import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.item_layout.*
 import me.dmba.mychecks.R
 import me.dmba.mychecks.common.extensions.extra
+import me.dmba.mychecks.data.ChecksDataSource
 import me.dmba.mychecks.data.model.Check
-import me.dmba.mychecks.ui.screens.main.MainNavigator.Companion.EXTRA_CHECK_ITEM
+import me.dmba.mychecks.ui.screens.main.MainNavigator.Companion.EXTRA_CHECK_ITEM_POSITION
 import me.dmba.mychecks.ui.screens.main.MainNavigator.Companion.EXTRA_CHECK_ITEM_TRANSITION_NAME
 import javax.inject.Inject
 
@@ -18,11 +19,14 @@ import javax.inject.Inject
  */
 class DetailActivity : DaggerAppCompatActivity() {
 
-    private val checkItem: Check by extra(EXTRA_CHECK_ITEM)
-    private val imageTransitionName: String by extra(EXTRA_CHECK_ITEM_TRANSITION_NAME)
+    private val checkItemPosition: Int by extra(EXTRA_CHECK_ITEM_POSITION)
+    private val imgTransitionName: String by extra(EXTRA_CHECK_ITEM_TRANSITION_NAME)
 
     @Inject
     lateinit var picasso: Picasso
+
+    @Inject
+    lateinit var dataSource: ChecksDataSource
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +34,9 @@ class DetailActivity : DaggerAppCompatActivity() {
 
         runEnterTransitions()
 
-        sharedView.transitionName = imageTransitionName
+        sharedView.transitionName = imgTransitionName
+
+        val checkItem = dataSource.getCheckAt(checkItemPosition)
 
         setupCheckItem(checkItem)
     }

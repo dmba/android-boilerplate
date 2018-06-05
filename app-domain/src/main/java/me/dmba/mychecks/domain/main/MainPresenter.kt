@@ -21,8 +21,8 @@ class MainPresenter @Inject constructor(
         view.updateList(data)
     }
 
-    override fun onItemSelect(check: Check) {
-        navigator.goToDetails(check)
+    override fun onItemSelect(check: Check, itemPosition: Int) {
+        navigator.goToDetails(check, itemPosition)
     }
 
 }
