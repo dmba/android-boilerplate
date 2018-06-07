@@ -26,13 +26,12 @@ internal class LocalChecksDataSource @Inject constructor(
 
     override fun saveChecks(checks: List<Check>): Completable {
         return Completable.fromCallable {
-            checks.map(::mapCheckToObject).forEach { dao.insert(it) }
+            checks.map(::mapCheckToObject).forEach(dao::insert)
         }
     }
 
     override fun clearAll(): Completable {
-        //TODO
-        return Completable.complete()
+        return Completable.fromCallable(dao::deleteAll)
     }
 
 }
