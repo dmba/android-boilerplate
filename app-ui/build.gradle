@@ -58,6 +58,7 @@ dependencies {
 
     implementation libraries.dagger
     implementation libraries.rxjava
+    implementation libraries.gson
 
     testImplementation testLibraries.junit
     testImplementation testLibraries.assertj

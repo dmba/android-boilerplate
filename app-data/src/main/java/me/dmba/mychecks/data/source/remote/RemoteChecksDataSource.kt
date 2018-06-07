@@ -15,7 +15,7 @@ internal class RemoteChecksDataSource @Inject constructor(
 
     override fun getChecks(refresh: Boolean): Flowable<List<Check>> {
         return api.getAll()
-            .flatMapIterable { it }
+            .flatMapIterable { it.checks }
             .map(::mapResponseToCheck)
             .toList()
             .toFlowable()

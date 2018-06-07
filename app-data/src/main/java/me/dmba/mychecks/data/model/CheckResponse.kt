@@ -26,3 +26,10 @@ internal data class CheckResponse(
     val isReceived: Boolean
 
 )
+
+internal data class CheckListResponse(
+
+    @SerializedName("checks")
+    val checks: List<CheckResponse>
+
+)

@@ -20,7 +20,7 @@ internal class LocalChecksDataSource @Inject constructor(
         return dao.getAll().map { it.map(::mapObjectToCheck).toList() }
     }
 
-    override fun getCheckAt(id: String): Maybe<Check> {
+    override fun getCheckById(id: String): Maybe<Check> {
         return dao.getById(id).map(::mapObjectToCheck)
     }
 

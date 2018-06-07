@@ -1,79 +1,33 @@
 package me.dmba.mychecks.data.source.remote
 
+import android.content.res.AssetManager
+import com.google.gson.Gson
 import io.reactivex.Flowable
 import me.dmba.mychecks.common.extensions.random
-import me.dmba.mychecks.data.model.CheckResponse
+import me.dmba.mychecks.data.model.CheckListResponse
+import java.io.InputStreamReader
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
  * Created by dmba on 6/6/18.
  */
-internal class FakeChecksApi @Inject constructor() : ChecksApi {
 
-    private val data = arrayListOf(
-        CheckResponse(
-            "#01",
-            "Hermes",
-            "$1,500.67",
-            "March 13, 2018",
-            "file:///android_asset/logos/logo_apple.png",
-            false
-        ),
-        CheckResponse(
-            "#02",
-            "Philipp Plein",
-            "$1,245.17",
-            "March 13, 2018",
-            "file:///android_asset/logos/logo_chrome.png",
-            true
-        ),
-        CheckResponse(
-            "#03",
-            "L`Ocitane",
-            "$545.28",
-            "March 13, 2018",
-            "file:///android_asset/logos/logo_cloud.jpeg",
-            true
-        ),
-        CheckResponse(
-            "#04",
-            "Kenzo",
-            "$375.37",
-            "March 13, 2018",
-            "file:///android_asset/logos/logo_grtia.jpeg",
-            false
-        ),
-        CheckResponse(
-            "#05",
-            "Ray Ban",
-            "$151.33",
-            "March 13, 2018",
-            "file:///android_asset/logos/logo_rayban.png",
-            true
-        ),
-        CheckResponse(
-            "#06",
-            "Stadium",
-            "$230.47",
-            "March 13, 2018",
-            "file:///android_asset/logos/logo_stadium.png",
-            false
-        ),
-        CheckResponse(
-            "#07",
-            "Apple",
-            "$3486.23",
-            "March 13, 2018",
-            "file:///android_asset/logos/logo_apple.png",
-            true
-        )
-    )
+const val FAKE_CHECKS_RESPONSE = "fake_checks_response.json"
 
-    private val thresholdMs: Long get() = (30..3000).random()
+internal class FakeChecksApi @Inject constructor(
+    private val gson: Gson,
+    private val assets: AssetManager
+) : ChecksApi {
 
-    override fun getAll(): Flowable<List<CheckResponse>> {
-        return Flowable.fromCallable<List<CheckResponse>> { data }
+    private val dataSource get() = InputStreamReader(assets.open(FAKE_CHECKS_RESPONSE))
+
+    private val response get() = gson.fromJson(dataSource, CheckListResponse::class.java)
+
+    private val thresholdMs get() = (30..3000).random()
+
+    override fun getAll(): Flowable<CheckListResponse> {
+        return Flowable.fromCallable<CheckListResponse> { response }
             .delay(thresholdMs, TimeUnit.MILLISECONDS)
     }
 

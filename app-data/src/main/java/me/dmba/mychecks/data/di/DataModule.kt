@@ -4,6 +4,9 @@ import android.arch.persistence.room.Room
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import android.content.res.AssetManager
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -33,13 +36,6 @@ object DataModule {
     @Provides
     @JvmStatic
     @ForApplication
-    internal fun provideAppSharedPrefs(context: Context): SharedPreferences {
-        return context.getSharedPreferences(context.applicationInfo.packageName, MODE_PRIVATE)
-    }
-
-    @Provides
-    @JvmStatic
-    @ForApplication
     internal fun provideChecksDatabase(context: Context): ChecksDatabase {
         return Room.databaseBuilder(context, ChecksDatabase::class.java, CHECKS_DB_NAME)
             .build()
@@ -52,6 +48,26 @@ object DataModule {
         return database.checksDao()
     }
 
+    @Provides
+    @JvmStatic
+    @ForApplication
+    internal fun provideAppSharedPrefs(context: Context): SharedPreferences {
+        return context.getSharedPreferences(context.applicationInfo.packageName, MODE_PRIVATE)
+    }
+
+    @Provides
+    @JvmStatic
+    @ForApplication
+    internal fun provideAssetManager(context: Context): AssetManager {
+        return context.resources.assets
+    }
+
+    @Provides
+    @JvmStatic
+    @ForApplication
+    internal fun provideGson(): Gson {
+        return GsonBuilder().create()
+    }
 }
 
 @Module
