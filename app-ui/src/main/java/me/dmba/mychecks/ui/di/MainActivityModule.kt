@@ -6,7 +6,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import me.dmba.mychecks.common.scopes.ForActivity
-import me.dmba.mychecks.domain.main.MainContract
+import me.dmba.mychecks.domain.MainContract
 import me.dmba.mychecks.ui.screens.main.MainActivity
 import me.dmba.mychecks.ui.screens.main.MainNavigator
 

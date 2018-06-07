@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion versions.targetSdk
@@ -18,8 +19,15 @@ dependencies {
 
     implementation libraries.kotlin
     implementation libraries.dagger
+    implementation libraries.rxjava
+    implementation libraries.support
+    implementation libraries.room
+    implementation libraries.gson
 
     testImplementation testLibraries.junit
     testImplementation testLibraries.assertj
     testImplementation testLibraries.mockito
+
+    kapt libraries.roomApt
+    kapt libraries.daggerApt
 }

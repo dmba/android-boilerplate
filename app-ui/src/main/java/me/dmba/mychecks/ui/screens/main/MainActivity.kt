@@ -1,7 +1,7 @@
 package me.dmba.mychecks.ui.screens.main
 
 import android.os.Bundle
-import android.os.Handler
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearLayoutManager.VERTICAL
@@ -10,8 +10,10 @@ import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import me.dmba.mychecks.R
+import me.dmba.mychecks.common.extensions.action
+import me.dmba.mychecks.common.extensions.snack
 import me.dmba.mychecks.data.model.Check
-import me.dmba.mychecks.domain.main.MainContract
+import me.dmba.mychecks.domain.MainContract
 import me.dmba.mychecks.ui.utils.ListPaddingDecoration
 import javax.inject.Inject
 
@@ -35,16 +37,30 @@ class MainActivity : DaggerAppCompatActivity(), MainContract.View, OnChecksItemC
     }
 
     override fun updateList(items: List<Check>) {
-        (recyclerView.adapter as ChecksRecyclerViewAdapter).updateData(items)
+        (recyclerView.adapter as ChecksAdapter).updateData(items)
     }
 
-    override fun onCheckItemClick(check: Check, sharedView: View) {
+    override fun showLoading() {
+        swipeRefreshLayout.isRefreshing = true
+    }
+
+    override fun hideLoading() {
+        swipeRefreshLayout.isRefreshing = false
+    }
+
+    override fun showDataFetchError() {
+        snack(R.string.app_data_fetch_error, Snackbar.LENGTH_INDEFINITE) {
+            action(R.string.app_retry) { presenter.loadData(refresh = true) }
+        }
+    }
+
+    override fun onCheckItemClick(check: Check, itemPosition: Int, sharedView: View) {
         sharedItemView = sharedView
-        presenter.onItemSelect(check)
+        presenter.onItemSelect(check, itemPosition)
     }
 
     private fun setUpRecyclerView() = recyclerView.apply {
-        adapter = ChecksRecyclerViewAdapter(this@MainActivity)
+        adapter = ChecksAdapter(this@MainActivity)
         layoutManager = LinearLayoutManager(context, VERTICAL, false)
         itemAnimator = DefaultItemAnimator()
         setHasFixedSize(true)
@@ -52,11 +68,7 @@ class MainActivity : DaggerAppCompatActivity(), MainContract.View, OnChecksItemC
     }
 
     private fun setUpSwipeRefreshLayout() = swipeRefreshLayout.apply {
-        setOnRefreshListener {
-            Handler().postDelayed({
-                swipeRefreshLayout.isRefreshing = false
-            }, 3000)
-        }
+        setOnRefreshListener { presenter.loadData(refresh = true) }
         setColorSchemeResources(R.color.orange, R.color.green, R.color.blue)
     }
 

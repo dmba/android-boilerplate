@@ -12,20 +12,20 @@ import me.dmba.mychecks.ui.screens.main.MainActivity
 @Module
 interface ActivityBuilderModule {
 
-    @ForActivity
     @ContributesAndroidInjector(
         modules = [
             MainActivityModule::class
         ]
     )
+    @ForActivity
     fun contributeMainActivity(): MainActivity
 
-    @ForActivity
     @ContributesAndroidInjector(
         modules = [
             DetailActivityModule::class
         ]
     )
+    @ForActivity
     fun contributeDetailActivity(): DetailActivity
 
 }
