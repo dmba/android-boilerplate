@@ -17,6 +17,7 @@ dependencies {
     implementation libraries.kotlin
     implementation libraries.support
     implementation libraries.dagger
+    implementation libraries.rxjava
 
     testImplementation testLibraries.junit
     testImplementation testLibraries.assertj

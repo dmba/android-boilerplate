@@ -1,7 +1,7 @@
 package me.dmba.mychecks.domain.presenters
 
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import me.dmba.mychecks.common.extensions.with
+import me.dmba.mychecks.common.rx.AppSchedulers
 import me.dmba.mychecks.data.ChecksDataContract.Repo
 import me.dmba.mychecks.data.model.Check
 import me.dmba.mychecks.domain.MainContract
@@ -16,14 +16,14 @@ import javax.inject.Inject
 internal class MainPresenter @Inject constructor(
     private val repo: Repo,
     private val view: View,
-    private val navigator: Navigator
+    private val navigator: Navigator,
+    private val schedulers: AppSchedulers
 ) : MainContract.Presenter {
 
     override fun loadData(refresh: Boolean) {
         view.showLoading()
         repo.getChecks(refresh)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .with(schedulers)
             .subscribe(::onNext, ::onError)
     }
 

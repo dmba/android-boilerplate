@@ -5,6 +5,10 @@ import com.squareup.picasso.Picasso
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
+import io.reactivex.schedulers.Schedulers.io
+import me.dmba.mychecks.common.rx.AppSchedulers
 import me.dmba.mychecks.common.scopes.ForApplication
 import me.dmba.mychecks.ui.App
 
@@ -23,6 +27,14 @@ object AppModule {
     @JvmStatic
     @ForApplication
     fun providePicasso(context: Context): Picasso = Picasso.with(context)
+
+    @Provides
+    @JvmStatic
+    @ForApplication
+    fun provideAppSchedulers(): AppSchedulers = object : AppSchedulers {
+        override val mainThread: Scheduler = mainThread()
+        override val background: Scheduler = io()
+    }
 
 }
 
