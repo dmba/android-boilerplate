@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 const val FAKE_CHECKS_RESPONSE = "fake_checks_response.json"
 
-internal class FakeChecksApi @Inject constructor(
+internal class DevChecksApi @Inject constructor(
     private val gson: Gson,
     private val assets: AssetManager
 ) : ChecksApi {

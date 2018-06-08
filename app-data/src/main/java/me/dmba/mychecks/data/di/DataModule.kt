@@ -4,7 +4,6 @@ import android.arch.persistence.room.Room
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import android.content.res.AssetManager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Binds
@@ -19,8 +18,6 @@ import me.dmba.mychecks.data.source.local.CHECKS_DB_NAME
 import me.dmba.mychecks.data.source.local.ChecksDao
 import me.dmba.mychecks.data.source.local.ChecksDatabase
 import me.dmba.mychecks.data.source.local.LocalChecksDataSource
-import me.dmba.mychecks.data.source.remote.ChecksApi
-import me.dmba.mychecks.data.source.remote.FakeChecksApi
 import me.dmba.mychecks.data.source.remote.RemoteChecksDataSource
 
 /**
@@ -28,7 +25,8 @@ import me.dmba.mychecks.data.source.remote.RemoteChecksDataSource
  */
 @Module(
     includes = [
-        DataModuleBindings::class
+        DataModuleBindings::class,
+        DevDataModule::class
     ]
 )
 object DataModule {
@@ -58,13 +56,6 @@ object DataModule {
     @Provides
     @JvmStatic
     @ForApplication
-    internal fun provideAssetManager(context: Context): AssetManager {
-        return context.resources.assets
-    }
-
-    @Provides
-    @JvmStatic
-    @ForApplication
     internal fun provideGson(): Gson {
         return GsonBuilder().create()
     }
@@ -84,9 +75,5 @@ internal interface DataModuleBindings {
     @Binds
     @ForApplication
     fun bindsRepo(repo: ChecksRepo): ChecksDataContract.Repo
-
-    @Binds
-    @ForApplication
-    fun bindsChecksApi(api: FakeChecksApi): ChecksApi
 
 }
