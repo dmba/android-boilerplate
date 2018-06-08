@@ -1,3 +1,60 @@
-[
-
-]
+{
+    "checks": [
+        {
+            "id": "#01",
+            "name": "Hermes",
+            "amount": "$1,500.67",
+            "date": "March 13, 2018",
+            "img_url": "file:///android_asset/logos/logo_apple.png",
+            "is_received": false
+        },
+        {
+            "id": "#02",
+            "name": "Philipp Plein",
+            "amount": "$1,245.17",
+            "date": "March 13, 2018",
+            "img_url": "file:///android_asset/logos/logo_chrome.png",
+            "is_received": true
+        },
+        {
+            "id": "#03",
+            "name": "L`Ocitane",
+            "amount": "$545.28",
+            "date": "March 13, 2018",
+            "img_url": "file:///android_asset/logos/logo_cloud.jpeg",
+            "is_received": true
+        },
+        {
+            "id": "#04",
+            "name": "Kenzo",
+            "amount": "$375.37",
+            "date": "March 13, 2018",
+            "img_url": "file:///android_asset/logos/logo_grtia.jpeg",
+            "is_received": false
+        },
+        {
+            "id": "#05",
+            "name": "Ray Ban",
+            "amount": "$151.33",
+            "date": "March 13, 2018",
+            "img_url": "file:///android_asset/logos/logo_rayban.png",
+            "is_received": true
+        },
+        {
+            "id": "#06",
+            "name": "Stadium",
+            "amount": "$230.47",
+            "date": "March 13, 2018",
+            "img_url": "file:///android_asset/logos/logo_stadium.png",
+            "is_received": false
+        },
+        {
+            "id": "#07",
+            "name": "Apple",
+            "amount": "$3486.23",
+            "date": "March 13, 2018",
+            "img_url": "file:///android_asset/logos/logo_apple.png",
+            "is_received": true
+        }
+    ]
+}

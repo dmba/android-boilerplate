@@ -1,13 +1,13 @@
 package me.dmba.mychecks.data.source.remote
 
 import io.reactivex.Flowable
-import me.dmba.mychecks.data.model.CheckResponse
+import me.dmba.mychecks.data.model.CheckListResponse
 
 /**
  * Created by dmba on 6/6/18.
  */
 internal interface ChecksApi {
 
-    fun getAll(): Flowable<List<CheckResponse>>
+    fun getAll(): Flowable<CheckListResponse>
 
 }

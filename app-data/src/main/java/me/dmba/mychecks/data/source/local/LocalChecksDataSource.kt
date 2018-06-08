@@ -20,19 +20,18 @@ internal class LocalChecksDataSource @Inject constructor(
         return dao.getAll().map { it.map(::mapObjectToCheck).toList() }
     }
 
-    override fun getCheckAt(id: String): Maybe<Check> {
+    override fun getCheckById(id: String): Maybe<Check> {
         return dao.getById(id).map(::mapObjectToCheck)
     }
 
     override fun saveChecks(checks: List<Check>): Completable {
         return Completable.fromCallable {
-            checks.map(::mapCheckToObject).forEach { dao.insert(it) }
+            checks.map(::mapCheckToObject).forEach(dao::insert)
         }
     }
 
     override fun clearAll(): Completable {
-        //TODO
-        return Completable.complete()
+        return Completable.fromCallable(dao::deleteAll)
     }
 
 }

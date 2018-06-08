@@ -40,7 +40,7 @@ class DetailActivity : DaggerAppCompatActivity() {
 
         sharedView.transitionName = imgTransitionName
 
-        repo.getCheckAt(itemId)
+        repo.getCheckById(itemId)
             .subscribeOn(io())
             .observeOn(mainThread())
             .subscribe({

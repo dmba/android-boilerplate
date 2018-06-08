@@ -21,7 +21,7 @@ interface ChecksDataContract {
     interface LocalDataSource : BaseDataSource {
 
         @AnyThread
-        fun getCheckAt(id: String): Maybe<Check>
+        fun getCheckById(id: String): Maybe<Check>
 
         @AnyThread
         fun saveChecks(checks: List<Check>): Completable
