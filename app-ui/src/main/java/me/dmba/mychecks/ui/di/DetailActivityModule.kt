@@ -4,6 +4,7 @@ import android.content.Context
 import dagger.Binds
 import dagger.Module
 import me.dmba.mychecks.common.scopes.ForActivity
+import me.dmba.mychecks.domain.DetailsContract
 import me.dmba.mychecks.ui.screens.detail.DetailActivity
 
 /**
@@ -23,5 +24,9 @@ interface DetailActivityBindingsModule {
     @Binds
     @ForActivity
     fun bindsContext(activity: DetailActivity): Context
+
+    @Binds
+    @ForActivity
+    fun bindsDetailsView(activity: DetailActivity): DetailsContract.View
 
 }
