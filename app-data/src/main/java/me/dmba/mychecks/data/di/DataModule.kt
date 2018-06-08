@@ -25,8 +25,8 @@ import me.dmba.mychecks.data.source.remote.RemoteChecksDataSource
  */
 @Module(
     includes = [
-        DataModuleBindings::class,
-        DevDataModule::class
+        DevDataModule::class,
+        DataModuleBindings::class
     ]
 )
 object DataModule {
