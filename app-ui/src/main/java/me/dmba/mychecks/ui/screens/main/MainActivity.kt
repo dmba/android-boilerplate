@@ -6,7 +6,6 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearLayoutManager.VERTICAL
 import android.view.View
-import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import me.dmba.mychecks.R
@@ -15,15 +14,16 @@ import me.dmba.mychecks.common.extensions.snack
 import me.dmba.mychecks.data.model.Check
 import me.dmba.mychecks.domain.MainContract
 import me.dmba.mychecks.ui.utils.ListPaddingDecoration
+import me.dmba.mychecks.ui.utils.RxPresenterActivity
 import javax.inject.Inject
 
 /**
  * Created by dmba on 5/31/18.
  */
-class MainActivity : DaggerAppCompatActivity(), MainContract.View, OnChecksItemClickListener {
+class MainActivity : RxPresenterActivity<MainContract.Presenter>(), MainContract.View, OnChecksItemClickListener {
 
     @Inject
-    lateinit var presenter: MainContract.Presenter
+    override lateinit var presenter: MainContract.Presenter
 
     lateinit var sharedItemView: View
 

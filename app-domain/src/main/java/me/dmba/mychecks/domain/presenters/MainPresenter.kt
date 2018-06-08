@@ -1,5 +1,6 @@
 package me.dmba.mychecks.domain.presenters
 
+import me.dmba.mychecks.common.extensions.addTo
 import me.dmba.mychecks.common.extensions.with
 import me.dmba.mychecks.common.rx.AppSchedulers
 import me.dmba.mychecks.data.ChecksDataContract.Repo
@@ -7,6 +8,7 @@ import me.dmba.mychecks.data.model.Check
 import me.dmba.mychecks.domain.MainContract
 import me.dmba.mychecks.domain.MainContract.Navigator
 import me.dmba.mychecks.domain.MainContract.View
+import me.dmba.mychecks.domain.utils.RxPresenter
 import java.io.IOException
 import javax.inject.Inject
 
@@ -18,13 +20,14 @@ internal class MainPresenter @Inject constructor(
     private val view: View,
     private val navigator: Navigator,
     private val schedulers: AppSchedulers
-) : MainContract.Presenter {
+) : RxPresenter(), MainContract.Presenter {
 
     override fun loadData(refresh: Boolean) {
         view.showLoading()
         repo.getChecks(refresh)
             .with(schedulers)
             .subscribe(::onNext, ::onError)
+            .addTo(subscriptions)
     }
 
     override fun onItemSelect(check: Check, itemPosition: Int) {
