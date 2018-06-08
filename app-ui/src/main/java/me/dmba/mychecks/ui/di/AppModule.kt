@@ -10,7 +10,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.schedulers.Schedulers.io
 import me.dmba.mychecks.common.rx.AppSchedulers
 import me.dmba.mychecks.common.scopes.ForApplication
-import me.dmba.mychecks.domain.di.DevUiModule
 import me.dmba.mychecks.ui.App
 
 /**
