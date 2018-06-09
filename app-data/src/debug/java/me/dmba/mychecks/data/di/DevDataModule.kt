@@ -6,6 +6,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import me.dmba.mychecks.common.scopes.ForApplication
+import me.dmba.mychecks.data.devsettings.DevSettingsProvider
+import me.dmba.mychecks.data.devsettings.DevSettingsProviderImpl
 import me.dmba.mychecks.data.source.remote.ChecksApi
 import me.dmba.mychecks.data.source.remote.DevChecksApi
 
@@ -34,5 +36,9 @@ internal interface DevDataModuleBindings {
     @Binds
     @ForApplication
     fun bindsChecksApi(api: DevChecksApi): ChecksApi
+
+    @Binds
+    @ForApplication
+    fun bindsDevSettingsProvider(api: DevSettingsProviderImpl): DevSettingsProvider
 
 }
