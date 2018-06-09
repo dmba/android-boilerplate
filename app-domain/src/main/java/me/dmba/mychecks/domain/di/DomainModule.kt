@@ -2,7 +2,6 @@ package me.dmba.mychecks.domain.di
 
 import dagger.Binds
 import dagger.Module
-import me.dmba.mychecks.common.scopes.ForActivity
 import me.dmba.mychecks.common.scopes.ForFragment
 import me.dmba.mychecks.domain.DetailsContract
 import me.dmba.mychecks.domain.MainContract
@@ -24,7 +23,7 @@ object DomainModule
 internal interface DomainModuleBindings {
 
     @Binds
-    @ForActivity
+    @ForFragment
     fun bindsMainPresenter(presenter: MainPresenter): MainContract.Presenter
 
     @Binds

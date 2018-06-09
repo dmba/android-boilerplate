@@ -4,20 +4,20 @@ import dagger.Binds
 import dagger.Module
 import me.dmba.mychecks.common.scopes.ForFragment
 import me.dmba.mychecks.domain.DetailsContract
-import me.dmba.mychecks.ui.screens.detail.DetailsFragment
+import me.dmba.mychecks.ui.screens.details.DetailsFragment
 
 /**
  * Created by dmba on 6/9/18.
  */
 @Module(
     includes = [
-        DetailsFragmentBindingsModule::class
+        FragmentDetailsModuleBindings::class
     ]
 )
-object DetailsFragmentModule
+object FragmentDetailsModule
 
 @Module
-interface DetailsFragmentBindingsModule {
+interface FragmentDetailsModuleBindings {
 
     @Binds
     @ForFragment

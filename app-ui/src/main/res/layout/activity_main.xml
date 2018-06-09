@@ -1,44 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    tools:context=".ui.screens.MainActivity"
 >
-
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBar"
+    <fragment
+        android:id="@+id/activity_fragment_main"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:fitsSystemWindows="false">
+        android:layout_height="match_parent"
+        android:name="me.dmba.mychecks.ui.screens.main.MainFragment"
+    />
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentScrim="#2e87e1"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            android:background="@drawable/mountains"
-            app:title="My Checks">
-
-            <!-- You can add views that you want to appear on the
-                 collapsing toolbar here -->
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:layout_collapseMode="pin"
-                android:minHeight="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll|enterAlways"/>
-
-        </android.support.design.widget.CollapsingToolbarLayout>
-
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_main"/>
-
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

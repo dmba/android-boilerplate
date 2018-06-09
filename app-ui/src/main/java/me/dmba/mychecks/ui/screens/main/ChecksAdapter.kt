@@ -14,9 +14,7 @@ import me.dmba.mychecks.data.model.Check
  * Created by dmba on 6/2/18.
  */
 
-interface OnChecksItemClickListener {
-    fun onCheckItemClick(check: Check, itemPosition: Int, sharedView: View)
-}
+typealias OnChecksItemClickListener = (check: Check, itemPosition: Int, sharedView: View) -> Unit
 
 class ChecksViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bindModel(check: Check) = itemView.apply {
@@ -50,7 +48,7 @@ class ChecksAdapter(
         ViewCompat.setTransitionName(holder.itemView, data[position].id)
 
         holder.itemView.setOnClickListener {
-            clickListener.onCheckItemClick(data[position], position, holder.itemView)
+            clickListener(data[position], position, holder.itemView)
         }
     }
 

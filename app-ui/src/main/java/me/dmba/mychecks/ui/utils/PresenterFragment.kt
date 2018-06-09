@@ -6,7 +6,7 @@ import me.dmba.mychecks.domain.utils.BasePresenter
 /**
  * Created by dmba on 6/9/18.
  */
-abstract class RxPresenterFragment<T : BasePresenter> : DaggerFragment() {
+abstract class PresenterFragment<T : BasePresenter> : DaggerFragment() {
 
     abstract val presenter: T
 

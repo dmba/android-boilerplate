@@ -1,8 +1,7 @@
-package me.dmba.mychecks.ui.screens.detail
+package me.dmba.mychecks.ui.screens.details
 
 import android.os.Bundle
 import android.support.transition.ChangeBounds
-import android.support.transition.ChangeImageTransform
 import android.support.transition.ChangeTransform
 import android.support.transition.TransitionSet
 import android.support.v7.widget.DefaultItemAnimator
@@ -21,7 +20,7 @@ import me.dmba.mychecks.data.model.Check
 import me.dmba.mychecks.data.model.CheckItem
 import me.dmba.mychecks.domain.DetailsContract
 import me.dmba.mychecks.ui.utils.ListPaddingDecoration
-import me.dmba.mychecks.ui.utils.RxPresenterFragment
+import me.dmba.mychecks.ui.utils.PresenterFragment
 import javax.inject.Inject
 
 /**
@@ -31,8 +30,7 @@ class DetailsTransition : TransitionSet() {
     init {
         ordering = ORDERING_TOGETHER
         addTransition(ChangeBounds())
-            .addTransition(ChangeTransform())
-            .addTransition(ChangeImageTransform())
+        addTransition(ChangeTransform())
     }
 }
 
@@ -57,7 +55,7 @@ fun newDetailsFragment(checkId: String, transitionName: String): DetailsFragment
     }
 }
 
-class DetailsFragment : RxPresenterFragment<DetailsContract.Presenter>(), DetailsContract.View {
+class DetailsFragment : PresenterFragment<DetailsContract.Presenter>(), DetailsContract.View {
 
     @Inject
     override lateinit var presenter: DetailsContract.Presenter

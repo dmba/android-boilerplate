@@ -8,6 +8,7 @@ import dagger.Provides
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.schedulers.Schedulers.io
+import me.dmba.mychecks.BuildConfig
 import me.dmba.mychecks.common.rx.AppSchedulers
 import me.dmba.mychecks.common.scopes.ForApplication
 import me.dmba.mychecks.ui.App
@@ -27,7 +28,9 @@ object AppModule {
     @Provides
     @JvmStatic
     @ForApplication
-    fun providePicasso(context: Context): Picasso = Picasso.with(context)
+    fun providePicasso(context: Context): Picasso = Picasso.with(context).apply {
+        setIndicatorsEnabled(BuildConfig.DEBUG)
+    }
 
     @Provides
     @JvmStatic

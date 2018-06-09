@@ -2,39 +2,40 @@ package me.dmba.mychecks.ui.screens.main
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.LinearLayoutManager.VERTICAL
+import android.view.LayoutInflater
 import android.view.View
-import kotlinx.android.synthetic.main.activity_main.*
+import android.view.ViewGroup
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.fragment_main.*
 import me.dmba.mychecks.R
 import me.dmba.mychecks.common.extensions.action
 import me.dmba.mychecks.common.extensions.snack
 import me.dmba.mychecks.data.model.Check
 import me.dmba.mychecks.domain.MainContract
 import me.dmba.mychecks.ui.utils.ListPaddingDecoration
-import me.dmba.mychecks.ui.utils.RxPresenterActivity
-import me.dmba.mychecks.ui.utils.ViewModifier
+import me.dmba.mychecks.ui.utils.PresenterFragment
 import javax.inject.Inject
 
 /**
- * Created by dmba on 5/31/18.
+ * Created by dmba on 6/9/18.
  */
-class MainActivity : RxPresenterActivity<MainContract.Presenter>(), MainContract.View, OnChecksItemClickListener {
+class MainFragment : PresenterFragment<MainContract.Presenter>(), MainContract.View {
 
     @Inject
     override lateinit var presenter: MainContract.Presenter
 
-    @Inject
-    lateinit var viewModifier: ViewModifier
-
     lateinit var sharedItemView: View
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(viewModifier.modifyView(R.layout.activity_main))
-        setSupportActionBar(toolbar)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_main, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
         setUpRecyclerView()
         setUpSwipeRefreshLayout()
         presenter.loadData()
@@ -53,19 +54,19 @@ class MainActivity : RxPresenterActivity<MainContract.Presenter>(), MainContract
     }
 
     override fun showDataFetchError() {
-        snack(R.string.app_data_fetch_error, Snackbar.LENGTH_INDEFINITE) {
+        activity.snack(R.string.app_data_fetch_error, Snackbar.LENGTH_INDEFINITE) {
             action(R.string.app_retry) { presenter.loadData(refresh = true) }
         }
     }
 
-    override fun onCheckItemClick(check: Check, itemPosition: Int, sharedView: View) {
+    private fun onCheckItemClick(check: Check, itemPosition: Int, sharedView: View) {
         sharedItemView = sharedView
         presenter.onItemSelect(check, itemPosition)
     }
 
     private fun setUpRecyclerView() = recyclerView.apply {
-        adapter = ChecksAdapter(this@MainActivity)
-        layoutManager = LinearLayoutManager(context, VERTICAL, false)
+        adapter = ChecksAdapter(::onCheckItemClick)
+        layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         itemAnimator = DefaultItemAnimator()
         setHasFixedSize(true)
         addItemDecoration(ListPaddingDecoration.from(context))
