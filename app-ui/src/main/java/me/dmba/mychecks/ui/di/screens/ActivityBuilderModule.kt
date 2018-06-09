@@ -1,9 +1,8 @@
-package me.dmba.mychecks.ui.di
+package me.dmba.mychecks.ui.di.screens
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import me.dmba.mychecks.common.scopes.ForActivity
-import me.dmba.mychecks.ui.screens.detail.DetailActivity
 import me.dmba.mychecks.ui.screens.main.MainActivity
 
 /**
@@ -14,18 +13,11 @@ interface ActivityBuilderModule {
 
     @ContributesAndroidInjector(
         modules = [
-            MainActivityModule::class
+            MainActivityModule::class,
+            FragmentsBuilderModule::class
         ]
     )
     @ForActivity
     fun contributeMainActivity(): MainActivity
-
-    @ContributesAndroidInjector(
-        modules = [
-            DetailActivityModule::class
-        ]
-    )
-    @ForActivity
-    fun contributeDetailActivity(): DetailActivity
 
 }

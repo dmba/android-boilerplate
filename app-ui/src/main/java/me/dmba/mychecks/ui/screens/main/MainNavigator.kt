@@ -1,11 +1,9 @@
 package me.dmba.mychecks.ui.screens.main
 
-import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.view.ViewCompat
 import me.dmba.mychecks.data.model.Check
 import me.dmba.mychecks.domain.MainContract
-import me.dmba.mychecks.ui.screens.detail.DetailActivity
-import org.jetbrains.anko.intentFor
+import me.dmba.mychecks.ui.screens.detail.newDetailsFragment
 import javax.inject.Inject
 
 /**
@@ -15,23 +13,14 @@ class MainNavigator @Inject constructor(
     private val activity: MainActivity
 ) : MainContract.Navigator {
 
-    companion object {
-        const val EXTRA_CHECK_ITEM_ID = "EXTRA_CHECK_ITEM_ID"
-        const val EXTRA_CHECK_ITEM_TRANSITION_NAME = "EXTRA_CHECK_ITEM_TRANSITION_NAME"
-    }
-
     override fun goToDetails(check: Check, itemPosition: Int) {
         val transitionName = ViewCompat.getTransitionName(activity.sharedItemView)
-        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-            activity,
-            activity.sharedItemView,
-            transitionName)
 
-        activity.startActivity(activity.intentFor<DetailActivity>(
-            MainNavigator.EXTRA_CHECK_ITEM_ID to check.id,
-            MainNavigator.EXTRA_CHECK_ITEM_TRANSITION_NAME to transitionName
-        ), options.toBundle())
-        activity.overridePendingTransition(0, 0);
+        activity.supportFragmentManager.beginTransaction()
+            .addSharedElement(activity.sharedItemView, transitionName)
+            .add(android.R.id.content, newDetailsFragment(check.id, transitionName))
+            .addToBackStack(null)
+            .commit()
     }
 
 }

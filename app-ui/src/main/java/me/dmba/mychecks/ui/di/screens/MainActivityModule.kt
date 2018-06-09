@@ -1,4 +1,4 @@
-package me.dmba.mychecks.ui.di
+package me.dmba.mychecks.ui.di.screens
 
 import android.content.Context
 import android.view.LayoutInflater
