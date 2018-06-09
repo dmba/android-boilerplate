@@ -17,10 +17,7 @@ import me.dmba.mychecks.data.KeyValue
 import me.dmba.mychecks.data.keyvalue.SessionKeyValue
 import me.dmba.mychecks.data.keyvalue.SharedPrefsKeyValue
 import me.dmba.mychecks.data.source.ChecksRepo
-import me.dmba.mychecks.data.source.local.CHECKS_DB_NAME
-import me.dmba.mychecks.data.source.local.ChecksDao
-import me.dmba.mychecks.data.source.local.ChecksDatabase
-import me.dmba.mychecks.data.source.local.LocalChecksDataSource
+import me.dmba.mychecks.data.source.local.*
 import me.dmba.mychecks.data.source.remote.RemoteChecksDataSource
 import javax.inject.Named
 
@@ -52,6 +49,13 @@ object DataModule {
     @ForApplication
     internal fun provideChecksDao(database: ChecksDatabase): ChecksDao {
         return database.checksDao()
+    }
+
+    @Provides
+    @JvmStatic
+    @ForApplication
+    internal fun provideCheckItemsDao(database: ChecksDatabase): CheckItemsDao {
+        return database.checkItemsDao()
     }
 
     @Provides

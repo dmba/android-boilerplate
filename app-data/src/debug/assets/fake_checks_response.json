@@ -6,7 +6,29 @@
             "amount": "$1,500.67",
             "date": "March 13, 2018",
             "img_url": "file:///android_asset/logos/logo_apple.png",
-            "is_received": false
+            "is_received": false,
+            "items": [
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-1",
+                    "name": "Leather moto jacket",
+                    "amount": "$8,564.00"
+                },
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-2",
+                    "name": "Lorem ipsum",
+                    "amount": "$358.00"
+                },
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-3",
+                    "name": "Enim ad minim veniam",
+                    "amount": "$1,355.00"
+                },
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-4",
+                    "name": "Dolor in reprehenderit",
+                    "amount": "$2,333.12"
+                }
+            ]
         },
         {
             "id": "#02",
@@ -14,7 +36,29 @@
             "amount": "$1,245.17",
             "date": "March 13, 2018",
             "img_url": "file:///android_asset/logos/logo_chrome.png",
-            "is_received": true
+            "is_received": true,
+            "items": [
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-5",
+                    "name": "Leather moto jacket",
+                    "amount": "$8,564.00"
+                },
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-6",
+                    "name": "Lorem ipsum",
+                    "amount": "$358.00"
+                },
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-7",
+                    "name": "Enim ad minim veniam",
+                    "amount": "$1,355.00"
+                },
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-8",
+                    "name": "Dolor in reprehenderit",
+                    "amount": "$2,333.12"
+                }
+            ]
         },
         {
             "id": "#03",
@@ -22,7 +66,29 @@
             "amount": "$545.28",
             "date": "March 13, 2018",
             "img_url": "file:///android_asset/logos/logo_cloud.jpeg",
-            "is_received": true
+            "is_received": true,
+            "items": [
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-9",
+                    "name": "Leather moto jacket",
+                    "amount": "$8,564.00"
+                },
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-10",
+                    "name": "Lorem ipsum",
+                    "amount": "$358.00"
+                },
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-11",
+                    "name": "Enim ad minim veniam",
+                    "amount": "$1,355.00"
+                },
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-12",
+                    "name": "Dolor in reprehenderit",
+                    "amount": "$2,333.12"
+                }
+            ]
         },
         {
             "id": "#04",
@@ -30,7 +96,29 @@
             "amount": "$375.37",
             "date": "March 13, 2018",
             "img_url": "file:///android_asset/logos/logo_grtia.jpeg",
-            "is_received": false
+            "is_received": false,
+            "items": [
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-13",
+                    "name": "Leather moto jacket",
+                    "amount": "$8,564.00"
+                },
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-14",
+                    "name": "Lorem ipsum",
+                    "amount": "$358.00"
+                },
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-15",
+                    "name": "Enim ad minim veniam",
+                    "amount": "$1,355.00"
+                },
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-16",
+                    "name": "Dolor in reprehenderit",
+                    "amount": "$2,333.12"
+                }
+            ]
         },
         {
             "id": "#05",
@@ -38,7 +126,29 @@
             "amount": "$151.33",
             "date": "March 13, 2018",
             "img_url": "file:///android_asset/logos/logo_rayban.png",
-            "is_received": true
+            "is_received": true,
+            "items": [
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-17",
+                    "name": "Leather moto jacket",
+                    "amount": "$8,564.00"
+                },
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-18",
+                    "name": "Lorem ipsum",
+                    "amount": "$358.00"
+                },
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-19",
+                    "name": "Enim ad minim veniam",
+                    "amount": "$1,355.00"
+                },
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-20",
+                    "name": "Dolor in reprehenderit",
+                    "amount": "$2,333.12"
+                }
+            ]
         },
         {
             "id": "#06",
@@ -46,7 +156,19 @@
             "amount": "$230.47",
             "date": "March 13, 2018",
             "img_url": "file:///android_asset/logos/logo_stadium.png",
-            "is_received": false
+            "is_received": false,
+            "items": [
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-21",
+                    "name": "Lorem ipsum",
+                    "amount": "$358.00"
+                },
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-22",
+                    "name": "Enim ad minim veniam",
+                    "amount": "$1,355.00"
+                }
+            ]
         },
         {
             "id": "#07",
@@ -54,7 +176,19 @@
             "amount": "$3486.23",
             "date": "March 13, 2018",
             "img_url": "file:///android_asset/logos/logo_apple.png",
-            "is_received": true
+            "is_received": true,
+            "items": [
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-23",
+                    "name": "MacPro",
+                    "amount": "$8,564.00"
+                },
+                {
+                    "id": "xxxx-xxxx-xxxx-xxxx-24",
+                    "name": "iWatch",
+                    "amount": "$358.00"
+                }
+            ]
         }
     ]
 }

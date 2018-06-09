@@ -1,7 +1,7 @@
 package me.dmba.mychecks.data.source.remote
 
 import io.reactivex.Flowable
-import me.dmba.mychecks.data.model.CheckListResponse
+import me.dmba.mychecks.data.source.remote.model.CheckListResponse
 
 /**
  * Created by dmba on 6/6/18.

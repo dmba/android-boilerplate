@@ -4,7 +4,7 @@ import android.content.res.AssetManager
 import com.google.gson.Gson
 import io.reactivex.Flowable
 import me.dmba.mychecks.common.extensions.random
-import me.dmba.mychecks.data.model.CheckListResponse
+import me.dmba.mychecks.data.source.remote.model.CheckListResponse
 import java.io.InputStreamReader
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
