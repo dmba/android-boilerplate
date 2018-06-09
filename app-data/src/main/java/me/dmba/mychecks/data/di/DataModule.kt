@@ -14,10 +14,7 @@ import me.dmba.mychecks.data.ChecksDataContract
 import me.dmba.mychecks.data.ChecksDataContract.LocalDataSource
 import me.dmba.mychecks.data.ChecksDataContract.RemoteDataSource
 import me.dmba.mychecks.data.source.ChecksRepo
-import me.dmba.mychecks.data.source.local.CHECKS_DB_NAME
-import me.dmba.mychecks.data.source.local.ChecksDao
-import me.dmba.mychecks.data.source.local.ChecksDatabase
-import me.dmba.mychecks.data.source.local.LocalChecksDataSource
+import me.dmba.mychecks.data.source.local.*
 import me.dmba.mychecks.data.source.remote.RemoteChecksDataSource
 
 /**
@@ -44,6 +41,13 @@ object DataModule {
     @ForApplication
     internal fun provideChecksDao(database: ChecksDatabase): ChecksDao {
         return database.checksDao()
+    }
+
+    @Provides
+    @JvmStatic
+    @ForApplication
+    internal fun provideCheckItemsDao(database: ChecksDatabase): CheckItemsDao {
+        return database.checkItemsDao()
     }
 
     @Provides

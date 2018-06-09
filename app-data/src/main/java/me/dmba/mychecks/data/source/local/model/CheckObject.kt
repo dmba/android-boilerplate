@@ -1,4 +1,4 @@
-package me.dmba.mychecks.data.model
+package me.dmba.mychecks.data.source.local.model
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
