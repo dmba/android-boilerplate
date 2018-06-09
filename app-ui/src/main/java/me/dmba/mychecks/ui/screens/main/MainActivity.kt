@@ -15,6 +15,7 @@ import me.dmba.mychecks.data.model.Check
 import me.dmba.mychecks.domain.MainContract
 import me.dmba.mychecks.ui.utils.ListPaddingDecoration
 import me.dmba.mychecks.ui.utils.RxPresenterActivity
+import me.dmba.mychecks.ui.utils.ViewModifier
 import javax.inject.Inject
 
 /**
@@ -25,11 +26,14 @@ class MainActivity : RxPresenterActivity<MainContract.Presenter>(), MainContract
     @Inject
     override lateinit var presenter: MainContract.Presenter
 
+    @Inject
+    lateinit var viewModifier: ViewModifier
+
     lateinit var sharedItemView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(viewModifier.modifyView(R.layout.activity_main))
         setSupportActionBar(toolbar)
         setUpRecyclerView()
         setUpSwipeRefreshLayout()

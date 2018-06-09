@@ -13,6 +13,7 @@ import me.dmba.mychecks.domain.presenters.MainPresenter
  */
 @Module(
     includes = [
+        DevDomainModule::class,
         DomainModuleBindings::class
     ]
 )

@@ -18,6 +18,7 @@ import me.dmba.mychecks.ui.App
 
 @Module(
     includes = [
+        DevUiModule::class,
         AppBindingsModule::class
     ]
 )
