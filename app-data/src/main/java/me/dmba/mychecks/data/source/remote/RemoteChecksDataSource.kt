@@ -3,7 +3,7 @@ package me.dmba.mychecks.data.source.remote
 import io.reactivex.Flowable
 import me.dmba.mychecks.data.ChecksDataContract.RemoteDataSource
 import me.dmba.mychecks.data.model.Check
-import me.dmba.mychecks.data.model.mapResponseToCheck
+import me.dmba.mychecks.data.source.remote.model.mapResponseToCheck
 import javax.inject.Inject
 
 /**

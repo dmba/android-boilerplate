@@ -9,5 +9,6 @@ data class Check(
     val amount: String,
     val date: String,
     val imgUrl: String,
-    val isReceived: Boolean
+    val isReceived: Boolean,
+    val items: List<CheckItem>
 )

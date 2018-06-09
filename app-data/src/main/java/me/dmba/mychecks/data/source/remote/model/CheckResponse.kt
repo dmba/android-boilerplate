@@ -1,4 +1,4 @@
-package me.dmba.mychecks.data.model
+package me.dmba.mychecks.data.source.remote.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -23,13 +23,9 @@ internal data class CheckResponse(
     val imgUrl: String,
 
     @SerializedName("is_received")
-    val isReceived: Boolean
+    val isReceived: Boolean,
 
-)
-
-internal data class CheckListResponse(
-
-    @SerializedName("checks")
-    val checks: List<CheckResponse>
+    @SerializedName("items")
+    val items: List<CheckItemResponse>
 
 )
