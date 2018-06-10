@@ -22,6 +22,9 @@ import javax.inject.Inject
 /**
  * Created by dmba on 6/9/18.
  */
+
+fun newMainFragment() = MainFragment()
+
 class MainFragment : PresenterFragment<MainContract.Presenter>(), MainContract.View {
 
     @Inject

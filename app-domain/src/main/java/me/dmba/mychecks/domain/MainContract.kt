@@ -38,6 +38,9 @@ interface MainContract {
     interface Navigator {
 
         @UiThread
+        fun goToMainScreen()
+
+        @UiThread
         fun goToDetails(check: Check, itemPosition: Int)
 
     }

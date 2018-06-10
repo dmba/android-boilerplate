@@ -7,11 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.screens.MainActivity"
 >
-    <fragment
-        android:id="@+id/activity_fragment_main"
+
+    <FrameLayout
+        android:id="@+id/activity_main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="me.dmba.mychecks.ui.screens.main.MainFragment"
     />
 
 </RelativeLayout>

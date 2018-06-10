@@ -2,6 +2,7 @@ package me.dmba.mychecks.ui.di.screens
 
 import android.content.Context
 import android.support.v4.app.FragmentManager
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import dagger.Binds
 import dagger.Module
@@ -26,6 +27,11 @@ object MainActivityModule {
     @JvmStatic
     @ForActivity
     fun provideLayoutInflater(activity: MainActivity): LayoutInflater = activity.layoutInflater
+
+    @Provides
+    @JvmStatic
+    @ForActivity
+    fun provideTransitionInflater(activity: MainActivity): TransitionInflater = TransitionInflater.from(activity)
 
     @Provides
     @JvmStatic

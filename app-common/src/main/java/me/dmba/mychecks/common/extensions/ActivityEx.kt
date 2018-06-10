@@ -42,4 +42,8 @@ fun <T : Fragment> AppCompatActivity.findFragmentById(@IdRes fragmentId: Int): T
     return supportFragmentManager.findFragmentById(fragmentId) as T
 }
 
+fun <T : Fragment> AppCompatActivity.findFragmentByTag(tag: String): T {
+    return supportFragmentManager.findFragmentByTag(tag) as T
+}
+
 fun ClosedRange<Int>.random(): Long = (Random().nextInt(endInclusive - start) + start).toLong()
