@@ -4,6 +4,8 @@ import android.app.Activity
 import android.support.annotation.IdRes
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import java.util.*
@@ -34,6 +36,14 @@ fun Activity.snack(message: String, length: Int = Snackbar.LENGTH_LONG, f: Snack
 
 fun <T : Any> Activity.extra(key: String) = lazy {
     return@lazy intent.extras[key] as? T ?: error("Illegal type for $key")
+}
+
+fun <T : Fragment> AppCompatActivity.findFragmentById(@IdRes fragmentId: Int): T {
+    return supportFragmentManager.findFragmentById(fragmentId) as T
+}
+
+fun <T : Fragment> AppCompatActivity.findFragmentByTag(tag: String): T {
+    return supportFragmentManager.findFragmentByTag(tag) as T
 }
 
 fun ClosedRange<Int>.random(): Long = (Random().nextInt(endInclusive - start) + start).toLong()

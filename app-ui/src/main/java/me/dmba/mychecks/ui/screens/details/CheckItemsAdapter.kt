@@ -1,4 +1,4 @@
-package me.dmba.mychecks.ui.screens.detail
+package me.dmba.mychecks.ui.screens.details
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

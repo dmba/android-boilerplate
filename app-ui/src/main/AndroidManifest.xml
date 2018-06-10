@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="me.dmba.mychecks.ui.screens.main.MainActivity"
+            android:name="me.dmba.mychecks.ui.screens.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -19,10 +19,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
-        <activity
-            android:name="me.dmba.mychecks.ui.screens.detail.DetailActivity"
-            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 
