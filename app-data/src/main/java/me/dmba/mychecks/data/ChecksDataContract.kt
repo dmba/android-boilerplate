@@ -18,6 +18,8 @@ interface ChecksDataContract {
 
     }
 
+    interface RemoteDataSource : BaseDataSource
+
     interface LocalDataSource : BaseDataSource {
 
         @AnyThread
@@ -31,8 +33,11 @@ interface ChecksDataContract {
 
     }
 
-    interface RemoteDataSource : BaseDataSource
+    interface Repo : RemoteDataSource, LocalDataSource {
 
-    interface Repo : RemoteDataSource, LocalDataSource
+        @AnyThread
+        fun getErrors(): Flowable<Throwable>
+
+    }
 
 }

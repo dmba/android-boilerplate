@@ -22,6 +22,13 @@ internal class MainPresenter @Inject constructor(
     private val schedulers: AppSchedulers
 ) : RxPresenter(), MainContract.Presenter {
 
+    init {
+        repo.getErrors()
+            .with(schedulers)
+            .subscribe(::onError)
+            .addTo(subscriptions)
+    }
+
     override fun loadData(refresh: Boolean) {
         view.showLoading()
         repo.getChecks(refresh)
