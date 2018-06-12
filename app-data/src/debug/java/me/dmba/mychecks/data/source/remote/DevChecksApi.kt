@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import io.reactivex.Flowable
 import me.dmba.mychecks.common.extensions.random
 import me.dmba.mychecks.data.source.remote.model.CheckListResponse
+import java.io.IOException
 import java.io.InputStreamReader
 import java.io.Reader
 import java.util.concurrent.TimeUnit
@@ -31,7 +32,7 @@ internal class DevChecksApi @Inject constructor(
         get() = (30..3000).random()
 
     override fun getAll(): Flowable<CheckListResponse> {
-        return Flowable.fromCallable<CheckListResponse> { response }
+        return Flowable.fromCallable<CheckListResponse> { throw IOException("UPS!") }
             .delay(thresholdMs, TimeUnit.MILLISECONDS)
     }
 

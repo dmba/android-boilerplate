@@ -5,11 +5,13 @@ import me.dmba.mychecks.common.extensions.with
 import me.dmba.mychecks.common.rx.AppSchedulers
 import me.dmba.mychecks.data.ChecksDataContract.Repo
 import me.dmba.mychecks.data.model.Check
+import me.dmba.mychecks.data.model.ChecksStatus
+import me.dmba.mychecks.data.model.ChecksStatus.DataFetchError
+import me.dmba.mychecks.data.model.ChecksStatus.Ok
 import me.dmba.mychecks.domain.MainContract
 import me.dmba.mychecks.domain.MainContract.Navigator
 import me.dmba.mychecks.domain.MainContract.View
 import me.dmba.mychecks.domain.utils.RxPresenter
-import java.io.IOException
 import javax.inject.Inject
 
 /**
@@ -23,9 +25,9 @@ internal class MainPresenter @Inject constructor(
 ) : RxPresenter(), MainContract.Presenter {
 
     init {
-        repo.getErrors()
+        repo.getChecksStatus()
             .with(schedulers)
-            .subscribe(::onError)
+            .subscribe(::onStatusChange)
             .addTo(subscriptions)
     }
 
@@ -33,7 +35,7 @@ internal class MainPresenter @Inject constructor(
         view.showLoading()
         repo.getChecks(refresh)
             .with(schedulers)
-            .subscribe(::onNext, ::onError)
+            .subscribe(::onNext)
             .addTo(subscriptions)
     }
 
@@ -46,10 +48,10 @@ internal class MainPresenter @Inject constructor(
         view.hideLoading()
     }
 
-    private fun onError(throwable: Throwable) {
-        when (throwable) {
-            is IOException -> view.showDataFetchError()
-            else -> view.showDataFetchError()
+    private fun onStatusChange(status: ChecksStatus) {
+        when (status) {
+            is DataFetchError -> view.showDataFetchError()
+            is Ok -> view.hideAllErrors()
         }
         view.hideLoading()
     }

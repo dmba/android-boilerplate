@@ -23,6 +23,9 @@ interface MainContract {
         @UiThread
         fun showDataFetchError()
 
+        @UiThread
+        fun hideAllErrors()
+
     }
 
     interface Presenter : BasePresenter {

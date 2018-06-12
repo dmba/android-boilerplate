@@ -5,6 +5,7 @@ import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import me.dmba.mychecks.data.model.Check
+import me.dmba.mychecks.data.model.ChecksStatus
 
 /**
  * Created by dmba on 6/5/18.
@@ -36,7 +37,7 @@ interface ChecksDataContract {
     interface Repo : RemoteDataSource, LocalDataSource {
 
         @AnyThread
-        fun getErrors(): Flowable<Throwable>
+        fun getChecksStatus(): Flowable<ChecksStatus>
 
     }
 
