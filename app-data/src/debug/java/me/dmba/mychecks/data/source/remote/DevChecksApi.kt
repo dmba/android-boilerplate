@@ -31,9 +31,15 @@ internal class DevChecksApi @Inject constructor(
     private val thresholdMs: Long
         get() = (30..3000).random()
 
+    private var counter = 1
+
     override fun getAll(): Flowable<CheckListResponse> {
-        return Flowable.fromCallable<CheckListResponse> { throw IOException("UPS!") }
+        return Flowable.fromCallable<CheckListResponse>(::provideUnstableResponse)
             .delay(thresholdMs, TimeUnit.MILLISECONDS)
+    }
+
+    private fun provideUnstableResponse(): CheckListResponse {
+        return if (counter++ % 5 != 0) response else throw IOException("Network Error Occurred!")
     }
 
 }
