@@ -1,8 +1,14 @@
 package me.dmba.mychecks.data.source
 
+import io.reactivex.BackpressureStrategy.BUFFER
 import io.reactivex.Flowable
+import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.Subject
+import me.dmba.mychecks.common.extensions.firewall
 import me.dmba.mychecks.data.ChecksDataContract.*
 import me.dmba.mychecks.data.model.Check
+import me.dmba.mychecks.data.model.ChecksStatus
+import java.util.concurrent.TimeUnit.MILLISECONDS
 import javax.inject.Inject
 
 /**
@@ -15,24 +21,27 @@ internal class ChecksRepo @Inject constructor(
     LocalDataSource by local,
     RemoteDataSource by remote {
 
-    private var firstLoad = true;
+    private val status: Subject<ChecksStatus> = BehaviorSubject.create()
 
-    private val fetchAndSaveRemoteChecks: Flowable<List<Check>> by lazy {
-        remote.getChecks()
-            .doOnNext {
-                saveChecks(it).subscribe()
-            }
-            .doOnComplete {
-                firstLoad = false
-            }
-    }
+    override fun getChecksStatus(): Flowable<ChecksStatus> = status.toFlowable(BUFFER)
 
     override fun getChecks(refresh: Boolean): Flowable<List<Check>> {
-        return if (refresh || firstLoad) {
-            Flowable.concat(fetchAndSaveRemoteChecks, local.getChecks())
-        } else {
+        return Flowable.concatArrayEager(
             local.getChecks()
-        }
+                .firewall(::handleDataFetchOk, ::handleDataFetchError),
+            remote.getChecks()
+                .firewall(::handleDataFetchOk, ::handleDataFetchError)
+                .doOnNext { saveChecks(it).subscribe() }
+                .debounce(400, MILLISECONDS)
+        )
+    }
+
+    private fun handleDataFetchError(throwable: Throwable) {
+        status.onNext(ChecksStatus.DataFetchError(throwable))
+    }
+
+    private fun handleDataFetchOk() {
+        status.onNext(ChecksStatus.Ok())
     }
 
 }

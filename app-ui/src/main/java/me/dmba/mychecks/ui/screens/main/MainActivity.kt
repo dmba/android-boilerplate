@@ -53,7 +53,7 @@ class MainActivity : RxPresenterActivity<MainContract.Presenter>(), MainContract
     }
 
     override fun showDataFetchError() {
-        snack(R.string.app_data_fetch_error, Snackbar.LENGTH_INDEFINITE) {
+        snack(R.string.app_data_fetch_error, Snackbar.LENGTH_LONG) {
             action(R.string.app_retry) { presenter.loadData(refresh = true) }
         }
     }
@@ -61,6 +61,9 @@ class MainActivity : RxPresenterActivity<MainContract.Presenter>(), MainContract
     override fun onCheckItemClick(check: Check, itemPosition: Int, sharedView: View) {
         sharedItemView = sharedView
         presenter.onItemSelect(check, itemPosition)
+    }
+
+    override fun hideAllErrors() {
     }
 
     private fun setUpRecyclerView() = recyclerView.apply {

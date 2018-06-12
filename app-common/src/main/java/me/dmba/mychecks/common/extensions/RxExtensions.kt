@@ -18,7 +18,6 @@ fun <T> Flowable<T>.with(schedulers: AppSchedulers): Flowable<T> {
     return subscribeOn(schedulers.background).observeOn(schedulers.mainThread)
 }
 
-
 fun <T> Maybe<T>.with(schedulers: AppSchedulers): Maybe<T> {
     return subscribeOn(schedulers.background).observeOn(schedulers.mainThread)
 }
@@ -30,4 +29,12 @@ fun <T> Single<T>.with(schedulers: AppSchedulers): Single<T> {
 fun Disposable.addTo(disposables: DisposableContainer): Disposable {
     disposables += this
     return this
+}
+
+fun <T> Flowable<T>.firewall(onNext: () -> Unit, onError: (error: Throwable) -> Unit): Flowable<T> {
+    return materialize()
+        .doOnNext { it.error?.let(onError) }
+        .filter { !it.isOnError }
+        .dematerialize<T>()
+        .doOnNext { onNext() }
 }
