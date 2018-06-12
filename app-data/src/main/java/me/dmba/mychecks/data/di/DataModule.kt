@@ -19,14 +19,10 @@ import me.dmba.mychecks.data.keyvalue.SharedPrefsKeyValue
 import me.dmba.mychecks.data.source.ChecksRepo
 import me.dmba.mychecks.data.source.local.*
 import me.dmba.mychecks.data.source.remote.RemoteChecksDataSource
-import javax.inject.Named
 
 /**
  * Created by dmba on 6/4/18.
  */
-
-const val KEY_VALUE_SESSION = "KV_SESSION"
-const val KEY_VALUE_PREFS = "KV_PREFS"
 
 @Module(
     includes = [
@@ -90,12 +86,12 @@ internal interface DataModuleBindings {
     fun bindsRepo(repo: ChecksRepo): ChecksDataContract.Repo
 
     @Binds
-    @Named(KEY_VALUE_SESSION)
+    @KeyValueSession
     @ForApplication
     fun bindsSessionKeyValue(storage: SessionKeyValue): KeyValue
 
     @Binds
-    @Named(KEY_VALUE_PREFS)
+    @KeyValuePrefs
     @ForApplication
     fun bindsPrefsKeyValue(storage: SharedPrefsKeyValue): KeyValue
 
