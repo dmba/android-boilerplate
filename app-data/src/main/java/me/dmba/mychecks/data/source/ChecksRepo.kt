@@ -1,5 +1,6 @@
 package me.dmba.mychecks.data.source
 
+import android.util.Log
 import io.reactivex.Flowable
 import me.dmba.mychecks.data.ChecksDataContract.*
 import me.dmba.mychecks.data.model.Check
@@ -21,11 +22,16 @@ internal class ChecksRepo @Inject constructor(
             local.getChecks(),
             remote.getChecks()
                 .materialize()
+                .doOnNext { it.error?.let(::handleErrorCallback) }
                 .filter { !it.isOnError }
                 .dematerialize<List<Check>>()
                 .doOnNext { saveChecks(it).subscribe() }
                 .debounce(400, MILLISECONDS)
         )
+    }
+
+    private fun handleErrorCallback(error: Throwable) {
+        Log.e("REPO", "Error occurred $error")
     }
 
 }
