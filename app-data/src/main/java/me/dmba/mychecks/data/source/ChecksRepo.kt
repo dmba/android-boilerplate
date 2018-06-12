@@ -20,6 +20,10 @@ internal class ChecksRepo @Inject constructor(
         return Flowable.concatArrayEager(
             local.getChecks(),
             remote.getChecks()
+                .materialize()
+                .filter { !it.isOnError }
+                .dematerialize<List<Check>>()
+                .doOnNext { saveChecks(it).subscribe() }
                 .debounce(400, MILLISECONDS)
         )
     }
